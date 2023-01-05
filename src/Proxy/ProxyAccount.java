@@ -1,45 +1,75 @@
 package Proxy;
 
+import Service.BankAccountA;
 import Interfaces.IAccount;
 import Object.Account;
 
-import java.util.logging.Logger;
+import java.util.Date;
 
 public class ProxyAccount implements IAccount {
-    private IAccount concreteAccount;
-    private final static Logger LOGGER = Logger.getLogger(ProxyAccount.class.getName());
+    private IAccount realBankAccount;
+    //private final static Logger LOGGER = Logger.getLogger(ProxyAccount.class.getName());
+    private final static String COLOR = "\u001B[31m";
 
     public ProxyAccount(IAccount account) {
-        this.concreteAccount = account;
+        this.realBankAccount = account;
+    }
+
+    public ProxyAccount() {
+
     }
 
     public void setConcreteAccount(IAccount concreteAccount) {
-        this.concreteAccount = concreteAccount;
+        this.realBankAccount = concreteAccount;
     }
 
     @Override
-    public void getMoney(double cantidad) {
-        LOGGER.info("----Proxy Account - Get Money----");
-        /*if (concreteAccount == null) {
-            concreteAccount = new CuentaBancoAImpl();
-            return cuentaReal.retirarDinero(cuenta, monto);
+    public Account getMoney(Account account, double amount) {
+        //LOGGER.info("----Proxy Account - Get Money----");
+        getDate();
+        System.out.println("   INFO:  ----Proxy Account - Get Money----  Getting " + amount + "\u001B[0m");
+        System.out.println("Previous Balance: " + account.getBalance());
+        if (checkAccount()) {
+            realBankAccount = new BankAccountA();
+            return realBankAccount.getMoney(account, amount);
         } else {
-            return cuentaReal.retirarDinero(cuenta, monto);
-        }*/
-        concreteAccount.getMoney(cantidad);
-        concreteAccount.showBalance();
+            return realBankAccount.getMoney(account, amount);
+        }
     }
 
     @Override
-    public void depositMoney(double cantidad) {
-        LOGGER.info("----Proxy Account - Deposit Money----");
-        concreteAccount.depositMoney(cantidad);
-        concreteAccount.showBalance();
+    public Account depositMoney(Account account, double amount) {
+        getDate();
+        System.out.println("   INFO:  ----Proxy Account - Deposit Money----  Depositing " + amount + "\u001B[0m");
+        System.out.println("Previous Balance: " + account.getBalance());
+        //LOGGER.info("----Proxy Account - Deposit Money----");
+        if (checkAccount()) {
+            realBankAccount = new BankAccountA();
+            return realBankAccount.depositMoney(account, amount);
+        } else {
+            return realBankAccount.depositMoney(account, amount);
+        }
     }
 
     @Override
-    public void showBalance() {
-        LOGGER.info("----Proxy Account - Show Balance----");
-        concreteAccount.showBalance();
+    public void showBalance(Account account) {
+        //LOGGER.info("----Proxy Account - Show Balance----");
+        getDate();
+        System.out.println("   INFO:  ----Proxy Account - Show Balance----\u001B[0m");
+        if (checkAccount()) {
+            realBankAccount = new BankAccountA();
+            realBankAccount.showBalance(account);
+        } else {
+            realBankAccount.showBalance(account);
+        }
+    }
+
+    private boolean checkAccount() {
+        return (realBankAccount == null);
+    }
+
+    private void getDate() {
+        Date date = new Date();
+        System.out.print(COLOR + date);
     }
 }

@@ -2,7 +2,7 @@ package Interfaces;
 import Object.Account;
 
 public interface IAccount {
-    void getMoney(double cantidad);
-    void depositMoney(double cantidad);
-    void showBalance(Account acc);
+    Account getMoney(Account account, double amount);
+    Account depositMoney(Account account, double amount);
+    void showBalance(Account account);
 }

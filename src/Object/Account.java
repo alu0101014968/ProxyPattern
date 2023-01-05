@@ -1,37 +1,37 @@
 package Object;
 
 public class Account {
-    private int idCuenta;
-    private String usuario;
-    private double saldoInicial;
+    private int idAccount;
+    private String user;
+    private double balance;
 
-    public Account(int idCuenta, String usuario, double saldoInicial) {
-        this.idCuenta = idCuenta;
-        this.usuario = usuario;
-        this.saldoInicial = saldoInicial;
+    public Account(int idAccount, String user, double balance) {
+        this.idAccount = idAccount;
+        this.user = user;
+        this.balance = balance;
     }
 
-    public int getIdCuenta() {
-        return idCuenta;
+    public int getIdAccount() {
+        return idAccount;
     }
 
-    public void setIdCuenta(int idCuenta) {
-        this.idCuenta = idCuenta;
+    public void setIdAccount(int idAccount) {
+        this.idAccount = idAccount;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String user) {
+        this.user = user;
     }
 
-    public double getSaldoInicial() {
-        return saldoInicial;
+    public double getBalance() {
+        return balance;
     }
 
-    public void setSaldoInicial(double saldoInicial) {
-        this.saldoInicial = saldoInicial;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }
