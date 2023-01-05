@@ -29,6 +29,10 @@ public class ProxyAccount implements IAccount {
         getDate();
         System.out.println("   INFO:  ----Proxy Account - Get Money----  Getting " + amount + "\u001B[0m");
         System.out.println("Previous Balance: " + account.getBalance());
+        if (account.getBalance() < amount) {
+            System.out.println("Insufficient balance (" + (amount - account.getBalance()) + " left)");
+            amount = account.getBalance();
+        }
         if (checkAccount()) {
             realBankAccount = new BankAccountA();
             return realBankAccount.getMoney(account, amount);
